@@ -15,6 +15,7 @@
 /tmp/*
 !/log/.keep
 !/tmp/.keep
+/Blog_App.pem
 
 # Ignore pidfiles, but keep the directory.
 /tmp/pids/*
