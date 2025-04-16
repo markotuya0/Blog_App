@@ -1,0 +1,9 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: "My First Blog Post"
+  content: "This is the content of my first blog post. It needs to be long enough to pass validation, so I'm making sure it has enough characters."
+
+two:
+  title: "Another Great Blog Post"
+  content: "Here's another blog post with enough content to make it valid. This post is used for testing various features of our blog application."

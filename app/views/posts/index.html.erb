@@ -1,0 +1,24 @@
+<% content_for :title, "Blog Posts" %>
+
+<div id="posts">
+  <% @posts.each do |post| %>
+    <article class="post">
+      <h2><%= link_to post.title, post %></h2>
+      <div class="post-content">
+        <%= truncate(post.content, length: 200) %>
+      </div>
+      <div class="post-meta">
+        Posted <%= time_ago_in_words(post.created_at) %> ago
+      </div>
+    </article>
+  <% end %>
+</div>
+
+<% if @posts.empty? %>
+  <div class="post">
+    <p>No posts yet. <%= link_to "Write your first post", new_post_path %>!</p>
+  </div>
+<% end %>
+
+<%= link_to "Write a New Post", new_post_path, class: "button" %>
+
