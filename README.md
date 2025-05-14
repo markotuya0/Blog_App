@@ -1,102 +1,89 @@
-# Simple Blog App
+# 📝 Simple Blog App
 
-A minimal blog application built with Ruby on Rails. This project includes basic functionality for creating and managing blog posts. It's containerized using Docker and uses PostgreSQL for the database. Designed to be easily deployed to AWS.
-
----
-
-## Requirements
-
-- Ruby 3.1.x  
-- Rails 7.x  
-- PostgreSQL  
-- Docker & Docker Compose  
-- AWS (EC2, ECS, or similar for deployment)
+A minimal blog application built with **Ruby on Rails**, containerized using **Docker**, and backed by **PostgreSQL**. Designed for quick deployment on **AWS (EC2, ECS, or similar)**. Ideal for learning, prototyping, or simple content publishing.
 
 ---
 
-## Setup
+## 🚀 Features
 
-1. Clone the repository:
+- Create, edit, and delete blog posts  
+- List all posts on the homepage  
+- Clean and minimal UI (easy to customize)  
+- Basic validations for posts  
+- Pagination support *(optional/extendable)*
 
+---
+
+## 🧰 Requirements
+
+- **Ruby** 3.1.x  
+- **Rails** 7.x  
+- **PostgreSQL**  
+- **Docker & Docker Compose**  
+- **AWS** (optional: EC2, ECS for deployment)
+
+---
+
+## 🛠 Setup
+
+1. **Clone the repository**
+
+   ```bash
    git clone https://github.com/markotuya0/Blog_App.git
-   cd simple-blog-app
-Copy the .env example if needed:
+   cd Blog_App
 
- .env.example .env
-Build and run the app with Docker:
+2. Copy the example .env file
+   cp .env.example .env
 
-docker-compose up --build
-Set up the database:
+3. Build and run the app with Docker
+   docker-compose up --build
 
-docker-compose exec web rails db:create db:migrate
-Usage
-App runs at http://localhost:3000
+4. Set up the database
+  docker-compose exec web rails db:create db:migrate
 
-# Install dependencies
-bundle install
-
-# Set up the database
-rails db:create
-rails db:migrate
 🧪 Running the Test Suite
+If you're using Minitest:
+docker-compose exec web rails test
 
-# Run all tests
-rails test
-(Or rspec if you're using RSpec instead of the default test framework.)
+If you're using RSpec:
+docker-compose exec web rspec
 
-📂 Features
-Create, edit, and delete blog posts
+🌐 Usage
+Once the app is up, visit:
 
-List all posts on the homepage
+http://localhost:3000
+You can create, edit, and delete posts through the web interface.
 
-Clean, simple UI (customize to your needs)
+⚙️ Configuration
+Environment variables can be set in .env
 
-Basic validations for posts
+Follows standard Rails conventions
 
-Pagination support (if added)
+Customize UI, pagination, search, and more as needed
 
-🛠 Configuration
-All configurations are handled via standard Rails conventions
-
-You may set environment variables in .env (if using dotenv)
-
-⚙️ Services Used
-This project can be extended with:
-
-Background Jobs: Sidekiq or Active Job
+📦 Services & Extensions
+Background Jobs: Sidekiq / Active Job
 
 Caching: Redis (optional)
 
-Search: pg_search, Elasticsearch, or similar (optional)
+Search: pg_search, Elasticsearch (optional)
 
-You can create, edit, and delete posts
-
-Basic validations are in place
-
-Running Tests
-If you're using Minitest:
-
-docker-compose exec web rails test
-If you're using RSpec:
-
-
-docker-compose exec web rspec
-Deployment
-To deploy on AWS (e.g. EC2 or ECS):
-
+🚢 Deployment (AWS Example)
 Set up environment variables
 
 Build Docker image
 
-Push to your container registry
+Push image to a container registry
 
-Deploy via ECS or manually to EC2 with Docker Compose
+Deploy via ECS or manually to EC2 using Docker Compose
 
-You can also configure CI/CD using GitHub Actions or similar tools.
+Optional: Use GitHub Actions or other CI/CD tools for automation.
 
-Notes
-PostgreSQL is used as the default database
+📝 Notes
+PostgreSQL is the default database
 
-Docker ensures environment consistency
+Docker ensures consistent environments
 
-Environment variables can be managed using .env or AWS Secrets Manager
+You can manage secrets via .env or AWS Secrets Manager
+
+
