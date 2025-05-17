@@ -13,7 +13,7 @@ A lightweight blog application built with Ruby on Rails, containerized with Dock
 - [Features](#features)
 - [Requirements](#requirements)
 - [Getting Started](#getting-started)
-  - [Installation](#installation)
+  - [Quick Start with Docker](#quick-start-with-docker)
   - [Configuration](#configuration)
   - [Database Setup](#database-setup)
 - [Usage](#usage)
@@ -39,15 +39,12 @@ Simple Blog App is designed for quick deployment and easy customization. Perfect
 
 ## Requirements
 
-- Ruby 3.1.x
-- Rails 7.x
-- PostgreSQL
-- Docker & Docker Compose
-- AWS (optional, for deployment)
+- **Docker** and **Docker Compose** (the only software you need to install)
+- No need to install Ruby, Rails, or PostgreSQL locally
 
 ## Getting Started
 
-### Installation
+### Quick Start with Docker
 
 1. **Clone the repository**
 
@@ -56,35 +53,56 @@ Simple Blog App is designed for quick deployment and easy customization. Perfect
    cd Simple_Blog_App
    ```
 
-2. **Set up environment variables**
+2. **Build and start the application**
 
    ```bash
-   cp .env.example .env
-   # Edit .env with your configuration
-   ```
-
-3. **Build and start the application**
-
-   ```bash
+   # Start the application
    docker-compose up --build
    ```
 
+3. **Set up the database (in a new terminal window)**
+
+   ```bash
+   docker-compose exec web rails db:create db:migrate db:seed
+   ```
+
+That's it! Your application is now running at http://localhost:3001
+
+### Troubleshooting Docker Issues
+
+If you encounter Docker-related errors:
+
+1. **Port conflicts**: 
+   - The app is configured to use port 3001 to avoid conflicts
+   - If port 3001 is also in use, edit docker-compose.yml and change the port mapping
+
+2. **Docker Compose version issues**:
+   - Try using `docker compose` (without hyphen) for newer Docker versions
+   - The docker-compose.yml file uses version "2.0" which is widely supported
+
+3. **Permission issues**:
+   - On Linux/macOS, you might need to use `sudo`
+   - Ensure your user is in the docker group: `sudo usermod -aG docker $USER`
+
 ### Configuration
 
-The application can be configured through environment variables in the `.env` file:
+The application is pre-configured in the docker-compose.yml file with these default settings:
 
-- `DATABASE_URL`: PostgreSQL connection string
-- `RAILS_ENV`: Environment (development, test, production)
-- `PORT`: Application port (default: 3000)
+- Database name: blog_development
+- Database user: postgres
+- Database password: admin
+- Application port: 3001 (external) mapping to 3000 (internal)
+
+To modify these settings, edit the `docker-compose.yml` file.
 
 ### Database Setup
 
-Initialize the database with:
+The database is automatically created when you run the setup command:
 
 ```bash
 docker-compose exec web rails db:create db:migrate
 
-# Optional: Seed with sample data
+# Optional: Add sample data
 docker-compose exec web rails db:seed
 ```
 
@@ -92,7 +110,7 @@ docker-compose exec web rails db:seed
 
 Once the application is running, visit:
 
-- **Local Development**: http://localhost:3000
+- **Local Development**: http://localhost:3001
 
 From there you can:
 - View all posts on the homepage

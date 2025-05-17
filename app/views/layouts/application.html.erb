@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <title><%= content_for(:title) || "My Blog" %></title>
+    <title><%= content_for(:title) || "Simple Blog" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-capable" content="yes">
+    <meta name="description" content="A modern, lightweight blog application">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -13,28 +14,43 @@
     <link rel="icon" href="/icon.png" type="image/png">
     <link rel="icon" href="/icon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="/icon.png">
-
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <%= stylesheet_link_tag :app %>
   </head>
 
   <body>
     <header class="header">
-      <h1>My Blog</h1>
+      <h1><i class="fas fa-pen-fancy"></i> Simple Blog</h1>
       <nav class="nav">
-        <%= link_to "Home", root_path %>
-        <%= link_to "New Post", new_post_path %>
+        <%= link_to root_path do %>
+          <i class="fas fa-home"></i> Home
+        <% end %>
+        <%= link_to new_post_path do %>
+          <i class="fas fa-plus-circle"></i> New Post
+        <% end %>
       </nav>
     </header>
 
     <main>
       <% if notice %>
         <div class="notice">
-          <%= notice %>
+          <i class="fas fa-check-circle"></i> <%= notice %>
         </div>
       <% end %>
 
       <%= yield %>
     </main>
+    
+    <footer class="footer">
+      <p>&copy; <%= Date.today.year %> Simple Blog App. Built with <i class="fas fa-heart" style="color: #ef4444;"></i> By mark otuya using Ruby on Rails.</p>
+    </footer>
   </body>
 </html>
-

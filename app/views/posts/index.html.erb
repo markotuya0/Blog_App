@@ -1,24 +1,38 @@
-<% content_for :title, "Blog Posts" %>
+<% content_for :title, "Simple Blog - Latest Posts" %>
+
+<div class="page-header">
+  <h2><i class="fas fa-newspaper"></i> Latest Posts</h2>
+  <%= link_to new_post_path, class: "button" do %>
+    <i class="fas fa-plus"></i> Write New Post
+  <% end %>
+</div>
 
 <div id="posts">
   <% @posts.each do |post| %>
     <article class="post">
       <h2><%= link_to post.title, post %></h2>
       <div class="post-content">
-        <%= truncate(post.content, length: 200) %>
+        <%= truncate(post.content, length: 150) %>
       </div>
       <div class="post-meta">
-        Posted <%= time_ago_in_words(post.created_at) %> ago
+        <i class="far fa-clock"></i> <%= time_ago_in_words(post.created_at) %> ago
+      </div>
+      <div class="post-actions">
+        <%= link_to post, class: "button secondary" do %>
+          <i class="fas fa-eye"></i> Read More
+        <% end %>
       </div>
     </article>
   <% end %>
 </div>
 
 <% if @posts.empty? %>
-  <div class="post">
-    <p>No posts yet. <%= link_to "Write your first post", new_post_path %>!</p>
+  <div class="empty-state">
+    <i class="fas fa-feather-alt" style="font-size: 3rem; color: #6366f1; margin-bottom: 1rem;"></i>
+    <h3>No posts yet</h3>
+    <p>Share your thoughts with the world!</p>
+    <%= link_to new_post_path, class: "button" do %>
+      <i class="fas fa-plus"></i> Write Your First Post
+    <% end %>
   </div>
 <% end %>
-
-<%= link_to "Write a New Post", new_post_path, class: "button" %>
-
