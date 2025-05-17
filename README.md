@@ -66,15 +66,15 @@ Simple Blog App is designed for quick deployment and easy customization. Perfect
    docker-compose exec web rails db:create db:migrate db:seed
    ```
 
-That's it! Your application is now running at http://localhost:3001
+That's it! Your application is now running at http://localhost:3000
 
 ### Troubleshooting Docker Issues
 
 If you encounter Docker-related errors:
 
 1. **Port conflicts**: 
-   - The app is configured to use port 3001 to avoid conflicts
-   - If port 3001 is also in use, edit docker-compose.yml and change the port mapping
+   - The app is configured to use port 3000 to avoid conflicts
+   - If port 3000 is also in use, edit docker-compose.yml and change the port mapping
 
 2. **Docker Compose version issues**:
    - Try using `docker compose` (without hyphen) for newer Docker versions
@@ -91,7 +91,7 @@ The application is pre-configured in the docker-compose.yml file with these defa
 - Database name: blog_development
 - Database user: postgres
 - Database password: admin
-- Application port: 3001 (external) mapping to 3000 (internal)
+- Application port: 3000 (external) mapping to 3000 (internal)
 
 To modify these settings, edit the `docker-compose.yml` file.
 
@@ -110,7 +110,7 @@ docker-compose exec web rails db:seed
 
 Once the application is running, visit:
 
-- **Local Development**: http://localhost:3001
+- **Local Development**: http://localhost:3000
 
 From there you can:
 - View all posts on the homepage
