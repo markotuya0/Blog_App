@@ -1,89 +1,174 @@
-# 📝 Simple Blog App
+# Simple Blog App
 
-A minimal blog application built with **Ruby on Rails**, containerized using **Docker**, and backed by **PostgreSQL**. Designed for quick deployment on **AWS (EC2, ECS, or similar)**. Ideal for learning, prototyping, or simple content publishing.
+A lightweight blog application built with Ruby on Rails, containerized with Docker, and powered by PostgreSQL.
 
----
+![Ruby on Rails](https://img.shields.io/badge/Rails-7.x-red)
+![Ruby](https://img.shields.io/badge/Ruby-3.1.x-red)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-latest-blue)
+![Docker](https://img.shields.io/badge/Docker-ready-blue)
 
-## 🚀 Features
+## 📋 Table of Contents
 
-- Create, edit, and delete blog posts  
-- List all posts on the homepage  
-- Clean and minimal UI (easy to customize)  
-- Basic validations for posts  
-- Pagination support *(optional/extendable)*
+- [Overview](#overview)
+- [Features](#features)
+- [Requirements](#requirements)
+- [Getting Started](#getting-started)
+  - [Installation](#installation)
+  - [Configuration](#configuration)
+  - [Database Setup](#database-setup)
+- [Usage](#usage)
+- [Testing](#testing)
+- [Deployment](#deployment)
+- [Project Structure](#project-structure)
+- [Extensions & Services](#extensions--services)
+- [Contributing](#contributing)
+- [License](#license)
 
----
+## Overview
 
-## 🧰 Requirements
+Simple Blog App is designed for quick deployment and easy customization. Perfect for learning Rails, prototyping ideas, or setting up a simple content publishing platform.
 
-- **Ruby** 3.1.x  
-- **Rails** 7.x  
-- **PostgreSQL**  
-- **Docker & Docker Compose**  
-- **AWS** (optional: EC2, ECS for deployment)
+## Features
 
----
+- **Post Management**: Create, read, update, and delete blog posts
+- **Clean Interface**: Minimalist UI that's easy to navigate and customize
+- **Responsive Design**: Works on desktop and mobile devices
+- **Data Validation**: Basic validations for all post content
+- **Pagination**: Support for handling large numbers of posts
+- **Docker Integration**: Easy setup and consistent environments
 
-## 🛠 Setup
+## Requirements
+
+- Ruby 3.1.x
+- Rails 7.x
+- PostgreSQL
+- Docker & Docker Compose
+- AWS (optional, for deployment)
+
+## Getting Started
+
+### Installation
 
 1. **Clone the repository**
 
    ```bash
-   git clone https://github.com/markotuya0/Blog_App.git
-   cd Blog_App
+   git clone https://github.com/markotuya0/Simple_Blog_App.git
+   cd Simple_Blog_App
+   ```
 
-2. Copy the example .env file
+2. **Set up environment variables**
+
+   ```bash
    cp .env.example .env
+   # Edit .env with your configuration
+   ```
 
-3. Build and run the app with Docker
+3. **Build and start the application**
+
+   ```bash
    docker-compose up --build
+   ```
 
-4. Set up the database
-  docker-compose exec web rails db:create db:migrate
+### Configuration
 
-🧪 Running the Test Suite
-If you're using Minitest:
+The application can be configured through environment variables in the `.env` file:
+
+- `DATABASE_URL`: PostgreSQL connection string
+- `RAILS_ENV`: Environment (development, test, production)
+- `PORT`: Application port (default: 3000)
+
+### Database Setup
+
+Initialize the database with:
+
+```bash
+docker-compose exec web rails db:create db:migrate
+
+# Optional: Seed with sample data
+docker-compose exec web rails db:seed
+```
+
+## Usage
+
+Once the application is running, visit:
+
+- **Local Development**: http://localhost:3000
+
+From there you can:
+- View all posts on the homepage
+- Create new posts via the "New Post" button
+- Edit or delete existing posts
+- View individual posts in detail
+
+## Testing
+
+Run the test suite with:
+
+```bash
+# For Minitest
 docker-compose exec web rails test
 
-If you're using RSpec:
+# For RSpec (if configured)
 docker-compose exec web rspec
+```
 
-🌐 Usage
-Once the app is up, visit:
+## Deployment
 
-http://localhost:3000
-You can create, edit, and delete posts through the web interface.
+### AWS Deployment
 
-⚙️ Configuration
-Environment variables can be set in .env
+1. **Prepare your application**
+   - Ensure all environment variables are set for production
+   - Update `config/deploy.yml` if needed
 
-Follows standard Rails conventions
+2. **Build and push Docker image**
+   ```bash
+   docker build -t simple-blog-app .
+   # Push to your container registry
+   ```
 
-Customize UI, pagination, search, and more as needed
+3. **Deploy options**
+   - **EC2**: Use Docker Compose on an EC2 instance
+   - **ECS**: Deploy as an ECS service with task definitions
+   - **Elastic Beanstalk**: Use the Docker platform
 
-📦 Services & Extensions
-Background Jobs: Sidekiq / Active Job
+4. **Set up database**
+   - Use RDS for PostgreSQL in production
+   - Run migrations after deployment
 
-Caching: Redis (optional)
+## Project Structure
 
-Search: pg_search, Elasticsearch (optional)
+```
+app/
+├── controllers/    # Application controllers
+│   └── posts_controller.rb
+├── models/         # Data models
+│   └── post.rb
+├── views/          # UI templates
+│   └── posts/
+└── assets/         # CSS, JavaScript, images
+config/             # Application configuration
+db/                 # Database migrations and schema
+test/               # Test files
+```
 
-🚢 Deployment (AWS Example)
-Set up environment variables
+## Extensions & Services
 
-Build Docker image
+The application can be extended with:
 
-Push image to a container registry
+- **Background Jobs**: Sidekiq / Active Job
+- **Caching**: Redis
+- **Search**: pg_search or Elasticsearch
+- **Authentication**: Devise or custom auth
+- **File Storage**: Active Storage with AWS S3
 
-Deploy via ECS or manually to EC2 using Docker Compose
+## Contributing
 
-Optional: Use GitHub Actions or other CI/CD tools for automation.
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
-📝 Notes
-PostgreSQL is the default database
+## License
 
-Docker ensures consistent environments
-
-You can manage secrets via .env or AWS Secrets Manager
-
-
+This project is available as open source under the terms of the [MIT License](LICENSE).
